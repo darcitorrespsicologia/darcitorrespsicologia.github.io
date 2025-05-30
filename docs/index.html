@@ -1,0 +1,852 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darci Torres - Psicólogo Clínico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&amp;family=Montserrat:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3d5820',
+                        secondary: '#ab5c30',
+                        tertiary: '#a3b690',
+                        accent: '#c49c76',
+                        light: '#f8f5f2'
+                    },
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Ajuste da imagem de fundo para melhor distribuição */
+        .hero-section {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://imgur.com/OVVUDaV.jpg');
+            background-size: cover;
+            background-position: center 30%; /* Ajustado para melhor posicionamento vertical */
+            background-repeat: no-repeat;
+            min-height: 80vh; /* Aumentado para dar mais espaço */
+            display: flex;
+            align-items: center;
+            padding: 100px 0;
+            position: relative;
+        }
+        /* Removida a sombra em volta do texto */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 650px;
+            padding: 20px;
+            /* Removido: background-color e backdrop-filter */
+        }
+        .text-shadow {
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+        /* Ajustes para botões responsivos */
+        .btn-responsive {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 9999px;
+        }
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            .hero-section {
+                background-position: center center;
+            }
+        }
+        @media (max-width: 768px) {
+            .hero-section {
+                min-height: 70vh;
+                padding: 100px 0 60px;
+                background-position: center center;
+            }
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-content {
+                max-width: 90%;
+                margin: 0 auto;
+            }
+            /* Ajuste para garantir altura adequada em dispositivos móveis */
+            .how-works-container {
+                min-height: 300px !important;
+            }
+            .how-works-text-container {
+                min-height: 300px !important;
+            }
+            /* Ajustes para botões em telas médias */
+            .btn-responsive {
+                padding: 0.625rem 1.25rem;
+                font-size: 0.95rem;
+            }
+        }
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .hero-section {
+                background-position: 65% center; /* Ajuste para dispositivos móveis */
+            }
+            /* Ajuste adicional para telas muito pequenas */
+            .how-works-container {
+                min-height: 320px !important;
+            }
+            .how-works-text-container {
+                min-height: 320px !important;
+            }
+            /* Ajustes para botões em telas pequenas */
+            .btn-responsive {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+        }
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+        .btn-hover-effect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            background-color: #3d5820 !important; /* Cor do nome Darci Torres */
+        }
+        .service-image, .how-works-image {
+            height: 100%;
+            object-fit: cover;
+            width: 100%;
+            transition: transform 0.5s ease, filter 0.5s ease;
+        }
+        .image-container:hover .service-image,
+        .image-container:hover .how-works-image {
+            transform: scale(1.03);
+            filter: brightness(1.05);
+        }
+        .image-container {
+            overflow: hidden;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            height: 100%;
+        }
+        .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3d5820;
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        .section-hover {
+            transition: background-color 0.3s ease;
+        }
+        .section-hover:hover {
+            background-color: rgba(163, 182, 144, 0.15);
+        }
+        /* Ajustes para melhor visualização em desktop */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+        @media (min-width: 1024px) {
+            .container {
+                padding-left: 2rem;
+                padding-right: 2rem;
+            }
+        }
+        /* Ajuste para garantir que as imagens e caixas tenham o mesmo tamanho */
+        .equal-height-container {
+            display: flex;
+            flex-direction: column;
+        }
+        @media (min-width: 768px) {
+            .equal-height-container {
+                flex-direction: row;
+                min-height: 400px;
+            }
+        }
+        /* Ajuste para a seção "Como Funciona" - altura fixa sem rolagem */
+        .how-works-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            line-height: 1.6;
+        }
+        /* Garantir que o texto e a imagem tenham a mesma altura em dispositivos móveis */
+        .how-works-container {
+            min-height: 350px;
+        }
+        .how-works-text-container {
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+        }
+        /* Estilo para os títulos das seções de serviços e como funciona */
+        .section-title {
+            font-size: 1.5rem;
+            color: #ab5c30;
+            margin-bottom: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        /* Ajuste para o botão flutuante de WhatsApp em dispositivos móveis */
+        @media (max-width: 640px) {
+            .float-button {
+                width: 3.5rem !important;
+                height: 3.5rem !important;
+                bottom: 1rem !important;
+                right: 1rem !important;
+            }
+            .float-button i {
+                font-size: 1.5rem !important;
+            }
+        }
+        /* Estilo para o modal de contato */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 0.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        .contact-option {
+            padding: 1rem;
+            margin: 0.5rem 0;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .contact-option:hover {
+            background-color: #f8f5f2;
+        }
+        /* Estilo para os botões de ação no modal */
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-left: auto;
+        }
+        .action-button {
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .open-button {
+            background-color: #3d5820;
+            color: white;
+        }
+        .open-button:hover {
+            background-color: #2d4118;
+        }
+        .copy-button {
+            background-color: #f8f5f2;
+            border: 1px solid #e2e8f0;
+        }
+        .copy-button:hover {
+            background-color: #e2e8f0;
+        }
+        .action-button:active {
+            transform: scale(0.95);
+        }
+        /* Estilo para o botão de WhatsApp */
+        .whatsapp-button {
+            background-color: #25D366;
+            color: white;
+        }
+        .whatsapp-button:hover {
+            background-color: #1da851;
+        }
+        /* Estilo para o botão de Instagram */
+        .instagram-button {
+            background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+            color: white;
+        }
+        .instagram-button:hover {
+            opacity: 0.9;
+        }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:Montserrat, sans-serif;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.container{width:100%}@media (min-width: 640px){.container{max-width:640px}}@media (min-width: 768px){.container{max-width:768px}}@media (min-width: 1024px){.container{max-width:1024px}}@media (min-width: 1280px){.container{max-width:1280px}}@media (min-width: 1536px){.container{max-width:1536px}}.fixed{position:fixed}.bottom-8{bottom:2rem}.left-0{left:0px}.right-8{right:2rem}.top-0{top:0px}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.ml-4{margin-left:1rem}.mr-1{margin-right:0.25rem}.mr-2{margin-right:0.5rem}.mr-4{margin-right:1rem}.mt-12{margin-top:3rem}.mt-4{margin-top:1rem}.mt-6{margin-top:1.5rem}.mt-8{margin-top:2rem}.flex{display:flex}.inline-flex{display:inline-flex}.grid{display:grid}.hidden{display:none}.h-1{height:0.25rem}.h-16{height:4rem}.h-full{height:100%}.w-16{width:4rem}.w-36{width:9rem}.w-4\/5{width:80%}.w-6{width:1.5rem}.w-full{width:100%}.max-w-xl{max-width:36rem}.flex-grow{flex-grow:1}.-translate-x-full{--tw-translate-x:-100%;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.flex-col{flex-direction:column}.items-center{align-items:center}.justify-start{justify-content:flex-start}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-10{gap:2.5rem}.gap-4{gap:1rem}.space-x-6 > :not([hidden]) ~ :not([hidden]){--tw-space-x-reverse:0;margin-right:calc(1.5rem * var(--tw-space-x-reverse));margin-left:calc(1.5rem * calc(1 - var(--tw-space-x-reverse)))}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.border-b{border-bottom-width:1px}.border-l-4{border-left-width:4px}.border-t{border-top-width:1px}.border-gray-100{--tw-border-opacity:1;border-color:rgb(243 244 246 / var(--tw-border-opacity, 1))}.border-secondary{--tw-border-opacity:1;border-color:rgb(171 92 48 / var(--tw-border-opacity, 1))}.border-white{--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity, 1))}.border-opacity-20{--tw-border-opacity:0.2}.bg-accent{--tw-bg-opacity:1;background-color:rgb(196 156 118 / var(--tw-bg-opacity, 1))}.bg-gray-100{--tw-bg-opacity:1;background-color:rgb(243 244 246 / var(--tw-bg-opacity, 1))}.bg-light{--tw-bg-opacity:1;background-color:rgb(248 245 242 / var(--tw-bg-opacity, 1))}.bg-secondary{--tw-bg-opacity:1;background-color:rgb(171 92 48 / var(--tw-bg-opacity, 1))}.bg-tertiary{--tw-bg-opacity:1;background-color:rgb(163 182 144 / var(--tw-bg-opacity, 1))}.bg-white{--tw-bg-opacity:1;background-color:rgb(255 255 255 / var(--tw-bg-opacity, 1))}.bg-opacity-20{--tw-bg-opacity:0.2}.bg-opacity-25{--tw-bg-opacity:0.25}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-accent{--tw-gradient-from:#c49c76 var(--tw-gradient-from-position);--tw-gradient-to:rgb(196 156 118 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-secondary{--tw-gradient-to:rgb(171 92 48 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #ab5c30 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-primary{--tw-gradient-to:#3d5820 var(--tw-gradient-to-position)}.p-3{padding:0.75rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.px-4{padding-left:1rem;padding-right:1rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-4{padding-top:1rem;padding-bottom:1rem}.pt-6{padding-top:1.5rem}.text-left{text-align:left}.text-center{text-align:center}.font-serif{font-family:Playfair Display, serif}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.italic{font-style:italic}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99 / var(--tw-text-opacity, 1))}.text-gray-800{--tw-text-opacity:1;color:rgb(31 41 55 / var(--tw-text-opacity, 1))}.text-green-600{--tw-text-opacity:1;color:rgb(22 163 74 / var(--tw-text-opacity, 1))}.text-primary{--tw-text-opacity:1;color:rgb(61 88 32 / var(--tw-text-opacity, 1))}.text-secondary{--tw-text-opacity:1;color:rgb(171 92 48 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.opacity-0{opacity:0}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-md{--tw-shadow:0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-colors{transition-property:color, background-color, border-color, fill, stroke, -webkit-text-decoration-color;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, -webkit-text-decoration-color;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-opacity{transition-property:opacity;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-transform{transition-property:transform;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.ease-in-out{transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1)}.hover\:translate-x-1:hover{--tw-translate-x:0.25rem;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:scale-110:hover{--tw-scale-x:1.1;--tw-scale-y:1.1;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:transform:hover{transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.hover\:bg-accent:hover{--tw-bg-opacity:1;background-color:rgb(196 156 118 / var(--tw-bg-opacity, 1))}.hover\:bg-primary:hover{--tw-bg-opacity:1;background-color:rgb(61 88 32 / var(--tw-bg-opacity, 1))}.hover\:text-primary:hover{--tw-text-opacity:1;color:rgb(61 88 32 / var(--tw-text-opacity, 1))}.hover\:shadow-lg:hover{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}@media (min-width: 768px){.md\:mb-0{margin-bottom:0px}.md\:ml-6{margin-left:1.5rem}.md\:flex{display:flex}.md\:hidden{display:none}.md\:w-1\/2{width:50%}.md\:w-1\/3{width:33.333333%}.md\:w-2\/3{width:66.666667%}.md\:grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.md\:flex-row{flex-direction:row}.md\:p-8{padding:2rem}.md\:text-4xl{font-size:2.25rem;line-height:2.5rem}.md\:text-xl{font-size:1.25rem;line-height:1.75rem}}@media (min-width: 1024px){.lg\:ml-8{margin-left:2rem}}</style></head>
+<body class="bg-light text-gray-800">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-md z-50">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div>
+                <h1 class="text-primary font-serif text-2xl font-bold">Darci Torres</h1>
+                <p class="text-sm">Psicólogo Clínico - CRP 04/67106</p>
+            </div>
+            
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-6">
+                <a href="#sobre" class="nav-link hover:text-primary transition-colors font-medium">Sobre Mim</a>
+                <a href="#servicos" class="nav-link hover:text-primary transition-colors font-medium">Serviços</a>
+                <a href="#como-funciona" class="nav-link hover:text-primary transition-colors font-medium">Como Funciona</a>
+                <a href="#contato" class="nav-link hover:text-primary transition-colors font-medium">Contato</a>
+            </nav>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-primary text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed top-0 left-0 w-4/5 h-full bg-white z-50 shadow-lg transform -translate-x-full transition-transform duration-300 ease-in-out">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h3 class="text-xl font-medium">Menu</h3>
+                <button id="close-menu" class="text-2xl">×</button>
+            </div>
+            <nav class="flex flex-col space-y-4">
+                <a href="#sobre" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">Sobre Mim</a>
+                <a href="#servicos" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">Serviços</a>
+                <a href="#como-funciona" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">Como Funciona</a>
+                <a href="#contato" class="py-2 border-b border-gray-100 hover:text-primary transition-colors">Contato</a>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Modal de Contato -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-contact-modal">×</span>
+            <h3 class="text-2xl font-serif text-primary mb-4">Vamos conversar?</h3>
+            <p class="mb-6">Escolha como deseja entrar em contato:</p>
+            
+            <div class="space-y-4">
+                <div class="contact-option">
+                    <div class="flex items-center flex-grow">
+                        <i class="fas fa-phone-alt mr-4 text-secondary"></i>
+                        <span>(11) 97827-1578</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-button copy-button" data-copy="11978271578">
+                            <i class="far fa-copy mr-1"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="contact-option">
+                    <div class="flex items-center flex-grow">
+                        <i class="fab fa-whatsapp mr-4 text-secondary"></i>
+                        <span>WhatsApp</span>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="https://wa.me/message/HJFOZAFRPRSAF1" target="_blank" class="action-button whatsapp-button" id="whatsapp-link">
+                            <i class="fas fa-external-link-alt mr-1"></i> Abrir
+                        </a>
+                        <button class="action-button copy-button" data-copy="https://wa.me/message/HJFOZAFRPRSAF1">
+                            <i class="far fa-copy mr-1"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="contact-option">
+                    <div class="flex items-center flex-grow">
+                        <i class="fab fa-instagram mr-4 text-secondary"></i>
+                        <span>Instagram: @psico.darcitorres</span>
+                    </div>
+                    <div class="action-buttons">
+                        <a href="https://www.instagram.com/psico.darcitorres/" target="_blank" class="action-button instagram-button" id="instagram-link">
+                            <i class="fas fa-external-link-alt mr-1"></i> Abrir
+                        </a>
+                        <button class="action-button copy-button" data-copy="https://www.instagram.com/psico.darcitorres/">
+                            <i class="far fa-copy mr-1"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="contact-option">
+                    <div class="flex items-center flex-grow">
+                        <i class="far fa-envelope mr-4 text-secondary"></i>
+                        <span>darcitorrespsicologia@gmail.com</span>
+                    </div>
+                    <div class="action-buttons">
+                        <button class="action-button copy-button" data-copy="darcitorrespsicologia@gmail.com">
+                            <i class="far fa-copy mr-1"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="copy-success" class="mt-4 text-center text-green-600 opacity-0 transition-opacity duration-300">
+                Copiado com sucesso!
+            </div>
+            
+            <div class="mt-6 text-sm text-gray-600 bg-gray-100 p-3 rounded-lg">
+                <p><strong>Nota:</strong> Se o botão "Abrir" não funcionar devido às restrições do navegador, use a opção "Copiar" e cole o link em uma nova aba.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section with Background Image - Redesenhado para melhor distribuição -->
+    <section class="hero-section" style="min-height: 70vh;">
+        <div class="container mx-auto px-4 flex justify-start items-center">
+            <!-- Ajustado o posicionamento para ficar mais à esquerda, quase alinhado com o cabeçalho -->
+            <div class="hero-content ml-4 md:ml-6 lg:ml-8">
+                <h1 class="hero-title font-serif font-bold mb-6 text-white text-shadow">A terapia como espaço de transformação e autoconhecimento</h1>
+                <p class="text-lg md:text-xl mb-8 text-white text-shadow max-w-xl">Vamos conversar sobre o que você tem vivido e, juntos, construir novos sentidos.</p>
+                <div>
+                    <!-- Botão que abre o modal de contato -->
+                    <button id="open-contact-modal" class="btn-hover-effect btn-responsive bg-secondary hover:bg-accent text-white font-medium transition-all hover:shadow-lg inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        Agende sua conversa inicial
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-20 section-hover bg-opacity-25">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif text-primary text-center mb-4">Sobre Mim</h2>
+            <div class="h-1 w-36 bg-gradient-to-r from-accent via-secondary to-primary mx-auto mb-12"></div>
+            
+            <div class="flex flex-col md:flex-row gap-10 items-center">
+                <div class="md:w-1/3 image-container">
+                    <img src="https://imgur.com/6DtrgRH.jpg" alt="Darci Torres" class="rounded-lg shadow-lg w-full service-image">
+                </div>
+                <div class="md:w-2/3">
+                    <p class="mb-4 text-lg">Olá, que bom ter você por aqui!</p>
+                    
+                    <p class="mb-4">Sou o Darci, psicólogo clínico, e acredito que há partes de nós que só se revelam quando encontram uma escuta atenta, ética e humana, e é nesse encontro que centro meu trabalho.</p>
+                    
+                    <p class="mb-4">Minha prática é orientada pela psicanálise, especialmente pelas ideias de Donald Winnicott, que via o cuidado como uma experiência profundamente humana. É a partir disso que compreendo a psicoterapia, como um espaço de encontro, onde é possível ser, elaborar dores, sustentar conflitos e reencontrar um jeito mais vivo de existir.</p>
+                    
+                    <p class="mb-4">Me formei na Universidade de Uberaba e tive a oportunidade de realizar parte da minha graduação na Universidade do Porto, em Portugal. Essa vivência atravessou não só minha formação profissional, mas também pessoal, ampliando meu olhar para as muitas formas de sofrer e resistir, especialmente quando estamos longe de casa. Por isso, também acolho com atenção brasileiros que vivem fora do país.</p>
+                    
+                    <p class="mb-6">Hoje vivo em Minas Gerais, onde atendo, principalmente, jovens adultos, pessoas LGBTQIA+ e quem está atravessando fases de mudança, perda, dúvida ou recomeço. Meu compromisso é oferecer uma escuta ética, respeitosa e implicada com o que é singular em cada história.</p>
+                    
+                    <!-- Botão que abre o modal de contato -->
+                    <button id="open-contact-modal-2" class="btn-hover-effect btn-responsive bg-secondary hover:bg-accent text-white font-medium transition-all hover:shadow-lg inline-flex items-center">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        Vamos conversar?
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-20 bg-tertiary bg-opacity-20 section-hover">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif text-primary text-center mb-4">Serviços</h2>
+            <div class="h-1 w-36 bg-gradient-to-r from-accent via-secondary to-primary mx-auto mb-12"></div>
+            
+            <!-- Serviços com altura fixa e ajustada -->
+            <div class="equal-height-container gap-10 mb-8">
+                <!-- Container com altura fixa para ambos os elementos -->
+                <div class="md:w-1/2 flex mb-6 md:mb-0">
+                    <div class="image-container w-full" style="height: 350px;">
+                        <img src="https://imgur.com/Dt3Ylzn.jpg" alt="Serviços de Psicoterapia" class="service-image">
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 flex">
+                    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 service-card w-full" style="height: 350px;">
+                        <div class="flex flex-col justify-center h-full">
+                            <h3 class="section-title text-2xl mb-4">
+                                Psicoterapia Online
+                            </h3>
+                            <p class="mb-4">Atendo jovens adultos, pessoas LGBTQIA+ e brasileiros vivendo fora do país, em encontros online, com escuta ética, presença e sensibilidade.</p>
+                            <p>A psicoterapia é um espaço para quem deseja se escutar com mais profundidade, cuidar do que ainda dói, elaborar sentidos e sustentar escolhas mais alinhadas com quem se é.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Ajustado o espaçamento para melhor distribuição -->
+            <h3 class="text-xl font-serif text-primary mb-6 mt-8">Alguns temas que costumam surgir no processo:</h3>
+            
+            <div class="grid md:grid-cols-2 gap-4 mb-12">
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Ansiedade, angústias e crises existenciais</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Conflitos afetivos e familiares</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Mudanças importantes — de cidade, país, trabalho ou ciclo de vida</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Lutos, recomeços e rupturas</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Questões de autoestima, expressão do desejo e autoconhecimento</p>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow-sm border-l-4 border-secondary hover:transform hover:translate-x-1 transition-transform service-card">
+                    <p>Vivências ligadas à sexualidade, identidade de gênero e pertencimento</p>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <!-- Botão que abre o modal de contato -->
+                <button id="open-contact-modal-3" class="btn-hover-effect btn-responsive bg-secondary hover:bg-accent text-white font-medium transition-all hover:shadow-lg inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Quero falar sobre isso
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section - Atualizado com o novo conteúdo fornecido -->
+    <section id="como-funciona" class="py-20 bg-white section-hover">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-serif text-primary text-center mb-4">Como Funciona</h2>
+            <div class="h-1 w-36 bg-gradient-to-r from-accent via-secondary to-primary mx-auto mb-12"></div>
+            
+            <!-- Ajustado para garantir mesma altura sem rolagem e texto bem configurado -->
+            <div class="equal-height-container gap-10">
+                <div class="md:w-1/2 flex mb-6 md:mb-0 w-full">
+                    <!-- Adicionada classe how-works-text-container para controle de altura em dispositivos móveis -->
+                    <div class="bg-accent bg-opacity-20 p-6 rounded-lg service-card w-full flex items-center how-works-text-container" style="min-height: 454px;">
+                        <div class="how-works-text">
+                            <!-- Título atualizado conforme solicitado -->
+                            <h3 class="section-title text-2xl mb-4">O processo terapêutico</h3>
+                            <p class="mb-4">Começar a terapia é um gesto de coragem. Tudo começa com uma conversa inicial, sem compromisso, para nos conhecermos melhor.</p>
+                            
+                            <p class="mb-4">Se decidirmos continuar, os atendimentos acontecem uma vez por semana, com <strong>50 minutos de duração</strong>, em um horário reservado especialmente para você.</p>
+                            
+                            <p>Todos os atendimentos são realizados <strong>online</strong>, com ética, sigilo e presença, oferecendo um espaço de escuta onde quer que você esteja.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:w-1/2 flex w-full">
+                    <!-- Adicionada classe how-works-container para controle de altura em dispositivos móveis -->
+                    <div class="image-container w-full how-works-container" style="min-height: 454px;">
+                        <!-- Imagem mantida conforme solicitado -->
+                        <img src="https://imgur.com/PNwYq8t.jpg" alt="Como funciona a terapia" class="how-works-image" style="object-position: center 30%;">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white rounded-lg shadow-lg p-6 mt-12 text-center service-card">
+                <p class="italic mb-2 text-lg">Talvez seja hora de se escutar com mais presença.</p>
+                <p class="italic mb-6 text-lg">A primeira conversa pode ser o início dessa jornada.</p>
+                <!-- Botão que abre o modal de contato -->
+                <button id="open-contact-modal-4" class="btn-hover-effect btn-responsive bg-secondary hover:bg-accent text-white font-medium transition-all hover:shadow-lg inline-flex items-center">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    Agende sua conversa inicial
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Atualizado com o novo estilo e conteúdo fornecido -->
+    <footer id="contato" class="bg-accent text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between mb-12">
+                <div class="mb-8 md:mb-0">
+                    <div class="mb-4">
+                        <h3 class="font-serif text-2xl font-bold">Darci Torres</h3>
+                        <p class="text-sm">Psicólogo Clínico – CRP 04/67106</p>
+                    </div>
+                    <p>Atendimento online para todo o Brasil e brasileiros no exterior</p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xl mb-4 font-medium">Vamos conversar?</h4>
+                    <ul class="space-y-3">
+                        <li>
+                            <!-- Botão que abre o modal de contato -->
+                            <button class="open-contact-modal flex items-center hover:text-primary transition-colors text-left w-full">
+                                <i class="fab fa-whatsapp w-6 text-lg"></i>
+                                <span>WhatsApp</span>
+                            </button>
+                        </li>
+                        <li>
+                            <!-- Botão que abre o modal de contato -->
+                            <button class="open-contact-modal flex items-center hover:text-primary transition-colors text-left w-full">
+                                <i class="fab fa-instagram w-6 text-lg"></i>
+                                <span>Instagram</span>
+                            </button>
+                        </li>
+                        <li>
+                            <!-- Botão que abre o modal de contato -->
+                            <button class="open-contact-modal flex items-center hover:text-primary transition-colors text-left w-full">
+                                <i class="far fa-envelope w-6 text-lg"></i>
+                                <span>E-mail</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="text-center text-sm border-t border-white border-opacity-20 pt-6">
+                <p>© 2023 Darci Torres - Psicólogo Clínico – CRP 04/67106. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Contact Float Button - Ajustado para ser menor em dispositivos móveis -->
+    <!-- Botão que abre o modal de contato -->
+    <button class="open-contact-modal fixed bottom-8 right-8 w-16 h-16 bg-secondary hover:bg-primary rounded-full flex items-center justify-center text-white shadow-lg cursor-pointer transition-all hover:transform hover:scale-110 z-40 btn-hover-effect float-button">
+        <i class="fab fa-whatsapp text-3xl"></i>
+    </button>
+
+    <script>
+        // Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.remove('-translate-x-full');
+        });
+        
+        closeMenuButton.addEventListener('click', function() {
+            mobileMenu.classList.add('-translate-x-full');
+        });
+        
+        // Mobile Menu Links
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+        
+        // Modal de Contato
+        const contactModal = document.getElementById('contact-modal');
+        const openContactModalButtons = document.querySelectorAll('#open-contact-modal, #open-contact-modal-2, #open-contact-modal-3, #open-contact-modal-4, .open-contact-modal');
+        const closeContactModal = document.getElementById('close-contact-modal');
+        const copyButtons = document.querySelectorAll('.copy-button');
+        const copySuccess = document.getElementById('copy-success');
+        const whatsappLink = document.getElementById('whatsapp-link');
+        const instagramLink = document.getElementById('instagram-link');
+        
+        // Abrir modal
+        openContactModalButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                contactModal.style.display = 'flex';
+            });
+        });
+        
+        // Fechar modal
+        closeContactModal.addEventListener('click', function() {
+            contactModal.style.display = 'none';
+        });
+        
+        // Fechar modal ao clicar fora
+        window.addEventListener('click', function(event) {
+            if (event.target === contactModal) {
+                contactModal.style.display = 'none';
+            }
+        });
+        
+        // Lidar com cliques nos links externos (para contornar possíveis restrições de CORS)
+        whatsappLink.addEventListener('click', function(e) {
+            try {
+                // Tenta abrir o link normalmente
+                window.open('https://wa.me/message/HJFOZAFRPRSAF1', '_blank');
+            } catch (error) {
+                // Se falhar devido a restrições de sandbox, mostra mensagem
+                showLinkError();
+            }
+        });
+        
+        instagramLink.addEventListener('click', function(e) {
+            try {
+                // Tenta abrir o link normalmente
+                window.open('https://www.instagram.com/psico.darcitorres/', '_blank');
+            } catch (error) {
+                // Se falhar devido a restrições de sandbox, mostra mensagem
+                showLinkError();
+            }
+        });
+        
+        function showLinkError() {
+            const errorMsg = document.createElement('div');
+            errorMsg.className = 'fixed top-4 right-4 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded z-50';
+            errorMsg.innerHTML = 'Não foi possível abrir o link devido a restrições do navegador. Por favor, use a opção "Copiar" e cole o link em uma nova aba.';
+            document.body.appendChild(errorMsg);
+            
+            setTimeout(() => {
+                errorMsg.remove();
+            }, 5000);
+        }
+        
+        // Copiar texto dos botões
+        copyButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const textToCopy = this.getAttribute('data-copy');
+                
+                // Usar a API de clipboard para copiar o texto
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    // Mostrar mensagem de sucesso
+                    copySuccess.classList.remove('opacity-0');
+                    
+                    // Mudar o texto do botão temporariamente
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="fas fa-check mr-1"></i> Copiado!';
+                    this.classList.add('bg-green-100');
+                    
+                    // Restaurar após 2 segundos
+                    setTimeout(() => {
+                        copySuccess.classList.add('opacity-0');
+                        this.innerHTML = originalText;
+                        this.classList.remove('bg-green-100');
+                    }, 2000);
+                }).catch(err => {
+                    console.error('Erro ao copiar texto: ', err);
+                    
+                    // Método alternativo para navegadores que não suportam clipboard API
+                    const textarea = document.createElement('textarea');
+                    textarea.value = textToCopy;
+                    textarea.style.position = 'fixed';
+                    document.body.appendChild(textarea);
+                    textarea.focus();
+                    textarea.select();
+                    
+                    try {
+                        document.execCommand('copy');
+                        copySuccess.classList.remove('opacity-0');
+                        
+                        // Mudar o texto do botão temporariamente
+                        const originalText = this.innerHTML;
+                        this.innerHTML = '<i class="fas fa-check mr-1"></i> Copiado!';
+                        this.classList.add('bg-green-100');
+                        
+                        // Restaurar após 2 segundos
+                        setTimeout(() => {
+                            copySuccess.classList.add('opacity-0');
+                            this.innerHTML = originalText;
+                            this.classList.remove('bg-green-100');
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Falha ao copiar texto: ', err);
+                    }
+                    
+                    document.body.removeChild(textarea);
+                });
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                if (this.getAttribute('href') === '#') return;
+                
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add interactive hover effects to sections
+        const sections = document.querySelectorAll('.section-hover');
+        sections.forEach(section => {
+            section.addEventListener('mouseenter', function() {
+                this.classList.add('bg-opacity-25');
+            });
+            
+            section.addEventListener('mouseleave', function() {
+                this.classList.remove('bg-opacity-25');
+            });
+        });
+        
+        // Ensure proper mobile display
+        window.addEventListener('resize', function() {
+            const heroSection = document.querySelector('.hero-section');
+            if (window.innerWidth <= 768) {
+                heroSection.style.minHeight = '70vh';
+            } else {
+                heroSection.style.minHeight = '80vh';
+            }
+            
+            // Ajustar altura dos elementos na seção "Como Funciona" em dispositivos móveis
+            const textContainer = document.querySelector('.how-works-text-container');
+            const imageContainer = document.querySelector('.how-works-container');
+            
+            if (window.innerWidth <= 768) {
+                // Garantir que ambos os containers tenham a mesma altura em dispositivos móveis
+                const textHeight = textContainer.offsetHeight;
+                const imageHeight = imageContainer.offsetHeight;
+                
+                // Usar a maior altura para ambos os elementos
+                const maxHeight = Math.max(textHeight, imageHeight, 300);
+                textContainer.style.minHeight = maxHeight + 'px';
+                imageContainer.style.minHeight = maxHeight + 'px';
+            }
+        });
+        
+        // Run once on load
+        window.addEventListener('load', function() {
+            window.dispatchEvent(new Event('resize'));
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'947e80e96671a4f0',t:'MTc0ODYxMDk2MS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script><iframe height="1" width="1" style="position: absolute; top: 0px; left: 0px; border: none; visibility: hidden;"></iframe>
+
+</body></html>
